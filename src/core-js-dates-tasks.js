@@ -243,8 +243,9 @@ function getWeekNumberByDate(date) {
 function getNextFridayThe13th(date) {
   let year = date.getFullYear();
   let month = date.getMonth();
+  let found = false;
 
-  while (true) {
+  while (!found) {
     month += 1;
     if (month > 11) {
       month = 0;
@@ -252,11 +253,15 @@ function getNextFridayThe13th(date) {
     }
 
     const newDate = new Date(year, month, 13);
-    if (newDate.getDay() === 5) {
+    if (newDate.getUTCDay() === 5) {
+      found = true;
       return newDate;
     }
   }
+
+  return null;
 }
+
 /**
  * Returns the quarter of the year for a given date.
  *
